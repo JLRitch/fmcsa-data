@@ -72,17 +72,13 @@ def main():
                 urlString = f'https://www.fmcsa.dot.gov/safety/passenger-safety/search-results/by-company?page={i}&company={c}'
                 page = http.request('GET',urlString)
                 txt = page.data
-                soup = BeautifulSoup(txt,'lxml')
-                
-                if soup.find_all('li', {'class': 'pager-current last'}):
-                    data = htmlToDf(soup)
-                    dfToDB(data, conn, cur)
-                    i = 0
-                    break
-                
+                soup = BeautifulSoup(txt,'lxml')   
                 data = htmlToDf(soup)
                 dfToDB(data, conn, cur)
                 i += 1
+                
+                if soup.find_all('li', {'class': 'pager-current last'}):
+                    break
 
         # if only 1 pages exists for a letter
         else:
