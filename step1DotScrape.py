@@ -84,7 +84,7 @@ def main():
                 dfToDB(data, conn, cur)
                 i += 1
 
-        # if not the last page
+        # if only 1 pages exists for a letter
         else:
             data = htmlToDf(soup)
             dfToDB(data, conn, cur)
